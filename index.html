@@ -14,8 +14,15 @@
     .art-card.slideshow .slide.active { display: block; }
     .art-card.slideshow .prev,
     .art-card.slideshow .next {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(0,0,0,0.45); color: #fff; border: none; padding: 6px 10px; cursor: pointer; border-radius: 4px;
+      position: absolute; 
+      top: 50%; /* Change this value to adjust vertical position (e.g., 45%, 55%) */
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45); 
+      color: #fff; 
+      border: none; 
+      padding: 6px 10px; 
+      cursor: pointer; 
+      border-radius: 4px;
     }
     .art-card.slideshow .prev { left: 8px; }
     .art-card.slideshow .next { right: 8px; }
@@ -61,6 +68,8 @@
           <img src="art/grumley.png"  class="slide" />
           <img src="art/page.png"  class="slide" />
         </div>
+        <button class="prev" aria-label="Previous">‹</button>
+        <button class="next" aria-label="Next">›</button>
         <div class="art-title">Character Illustrations</div>
         <div class="art-desc">Featured on Legends of Avantris<br>Webseries</div>
       </div>
@@ -69,8 +78,9 @@
           <img src="art/deadlock.png" class="slide"/>
           <img src="art/banner.png" class="slide"/>
           <img src="art/p4.png" class="slide"/>
-
         </div>
+        <button class="prev" aria-label="Previous">‹</button>
+        <button class="next" aria-label="Next">›</button>
         <div class="art-title">Personal Projects</div>
         <div class="art-desc">Various Fanworks</div>
       </div>
