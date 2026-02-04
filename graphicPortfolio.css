@@ -1,0 +1,65 @@
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #4f8b52;
+      color: #222;
+    }
+    header {
+      background: #6bbb6f;
+      color: #d9ff92;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
+    .portfolio-section {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+    }
+    .art-card {
+      background: #3b3434;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 16px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .art-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    }
+    .art-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: #eee;
+    }
+    .art-title {
+      font-size: 1.2rem;
+      margin: 10px 0 6px 0;
+      color: #8aff9d;
+    }
+    .art-desc {
+      color: #7a7272;
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+    @media (max-width: 600px) {
+      .portfolio-section {
+        padding: 0 6px;
+      }
+      .art-image {
+        height: 140px;
+      }
+    }
