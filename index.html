@@ -38,6 +38,25 @@
       width: 36px; height: 36px; font-size: 22px; cursor: pointer; line-height: 36px;
     }
     .image-modal-close:focus { outline: 2px solid rgba(255,255,255,0.8); }
+    .image-modal-prev,
+    .image-modal-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      width: 44px;
+      height: 44px;
+      font-size: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      line-height: 44px;
+    }
+    .image-modal-prev { left: 16px; }
+    .image-modal-next { right: 16px; }
+    .image-modal-prev:focus,
+    .image-modal-next:focus { outline: 2px solid rgba(255,255,255,0.8); }
   </style>
 </head>
 <body>
@@ -89,16 +108,31 @@
   </section>
   <div id="image-modal" class="image-modal" aria-hidden="true" role="dialog" aria-label="Artwork preview">
     <button class="image-modal-close" aria-label="Close">×</button>
+    <button class="image-modal-prev" aria-label="Previous image">‹</button>
     <img id="image-modal-img" class="image-modal-content" alt="Artwork preview" />
+    <button class="image-modal-next" aria-label="Next image">›</button>
   </div>
   <script>
     (function(){
       const modal = document.getElementById('image-modal');
       const modalImg = document.getElementById('image-modal-img');
       const modalClose = modal.querySelector('.image-modal-close');
-      function openModal(src, alt){
-        modalImg.src = src;
-        modalImg.alt = alt || 'Artwork preview';
+      const modalPrev = modal.querySelector('.image-modal-prev');
+      const modalNext = modal.querySelector('.image-modal-next');
+
+      let modalSlides = [];
+      let modalIndex = 0;
+
+      function updateModalImage(){
+        if(!modalSlides.length) return;
+        const slide = modalSlides[modalIndex];
+        modalImg.src = slide.src;
+        modalImg.alt = slide.alt || 'Artwork preview';
+      }
+      function openModal(slides, index){
+        modalSlides = slides;
+        modalIndex = typeof index === 'number' ? index : 0;
+        updateModalImage();
         modal.classList.add('open');
         modal.setAttribute('aria-hidden', 'false');
       }
@@ -106,14 +140,40 @@
         modal.classList.remove('open');
         modal.setAttribute('aria-hidden', 'true');
         modalImg.src = '';
+        modalSlides = [];
+        modalIndex = 0;
       }
+      function showNextModal(){
+        if(!modalSlides.length) return;
+        modalIndex = (modalIndex + 1) % modalSlides.length;
+        updateModalImage();
+      }
+      function showPrevModal(){
+        if(!modalSlides.length) return;
+        modalIndex = (modalIndex - 1 + modalSlides.length) % modalSlides.length;
+        updateModalImage();
+      }
+
       modal.addEventListener('click', function(e){
         if(e.target === modal) closeModal();
       });
       modalClose.addEventListener('click', closeModal);
+      if(modalNext) modalNext.addEventListener('click', function(e){
+        e.stopPropagation();
+        showNextModal();
+      });
+      if(modalPrev) modalPrev.addEventListener('click', function(e){
+        e.stopPropagation();
+        showPrevModal();
+      });
+
       document.addEventListener('keydown', function(e){
         if(e.key === 'Escape') closeModal();
+        if(!modal.classList.contains('open')) return;
+        if(e.key === 'ArrowRight') showNextModal();
+        if(e.key === 'ArrowLeft') showPrevModal();
       });
+
       document.querySelectorAll('.art-card.slideshow').forEach(function(card){
         const slides = Array.from(card.querySelectorAll('.slide'));
         if(!slides.length) return;
@@ -132,9 +192,9 @@
         card.addEventListener('mouseenter', function(){ clearInterval(timer); });
         card.addEventListener('mouseleave', function(){ timer = setInterval(next, interval); });
         function resetTimer(){ clearInterval(timer); timer = setInterval(next, interval); }
-        slides.forEach(function(slide){
+        slides.forEach(function(slide, i){
           slide.addEventListener('click', function(){
-            openModal(slide.src, slide.alt);
+            openModal(slides, i);
           });
         });
         show(idx);
