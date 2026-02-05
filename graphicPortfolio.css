@@ -1,19 +1,34 @@
-    body {
+body {
       margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #4f8b52;
-      color: #222;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 12% -10%, rgba(120, 200, 150, 0.28), transparent 60%),
+        radial-gradient(900px 520px at 92% 8%, rgba(30, 60, 45, 0.45), transparent 55%),
+        linear-gradient(180deg, #18261f 0%, #2c4a38 45%, #3a5f47 100%);
+      background-attachment: fixed;
+      color: #e7efe1;
     }
     header {
-      background: #6bbb6f;
-      color: #d9ff92;
-      padding: 2rem 0;
+      background: linear-gradient(135deg, #4e7a57 0%, #2f4e3a 100%);
+      color: #f4ffe5;
+      padding: 3.25rem 0 2.25rem;
       text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
     }
     h1 {
       margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
+      font-size: 2.6rem;
+      letter-spacing: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    header p {
+      margin: 0.6rem 0 0;
+      font-size: 0.95rem;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: #cfe9b5;
     }
     .portfolio-section {
       max-width: 1100px;
@@ -26,16 +41,22 @@
       gap: 32px;
     }
     .art-card {
-      background: #3b3434;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: rgba(24, 30, 26, 0.92);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
       padding: 16px;
       text-align: center;
-      transition: transform 0.2s;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+      backdrop-filter: blur(6px);
     }
     .art-card:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+      border-color: rgba(160, 220, 180, 0.35);
     }
     .art-image {
       width: 100%;
@@ -46,13 +67,15 @@
       background: #eee;
     }
     .art-title {
-      font-size: 1.2rem;
-      margin: 10px 0 6px 0;
-      color: #8aff9d;
+      font-size: 1.1rem;
+      margin: 12px 0 6px 0;
+      color: #e9f6da;
+      letter-spacing: 0.8px;
+      font-weight: 600;
     }
     .art-desc {
-      color: #7a7272;
-      font-size: 1rem;
+      color: rgba(207, 226, 196, 0.75);
+      font-size: 0.95rem;
       margin-bottom: 0;
     }
     @media (max-width: 600px) {
